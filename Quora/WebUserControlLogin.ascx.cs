@@ -36,12 +36,13 @@ namespace Quora
                     Session.Add("UserId", reader[0]);  //reader[0] = UserId
 
                     DbConnection.DisconnectDb();//Bağlantı kapatılıyor.
-
-                    Response.Redirect("Test.aspx"); //Anasayafaya yönlendiriliyor.
+                    
+                    Response.Redirect("Index.aspx"); //Anasayafaya yönlendiriliyor.
                 }
                 else
                 {
                     LabelResult.Text = "Hatalı kullanıcı adı veya şifre";
+                    DbConnection.DisconnectDb();
                 }
 
                 DbConnection.DisconnectDb();

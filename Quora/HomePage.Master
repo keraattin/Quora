@@ -1,0 +1,77 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HomePage.master.cs" Inherits="Quora.HomePage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/><!--Siteyi Responsive yapar-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="css/glyphicons.css" rel="stylesheet" media="screen" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header>
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <ContentTemplate>
+                    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="padding-left:20%;">
+                        <a class="navbar-brand" href="Index.aspx" style="color:darkred; font-style:oblique; font-size:28px;">Quora</a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                       <li class="nav-item active">
+                        <a class="nav-link" href="Index.aspx">Home<span class="glyphicon glyphicon-list-alt"></span></a>
+                      </li>
+                       <li>
+                          <a class="nav-link" href="#">Answer <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
+                       </li>
+                        <li>
+                          <a class="nav-link" href="#">Notifications <span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a>
+                       </li>
+                        <li>
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <asp:Label ID="LabelName" runat="server" Text=""></asp:Label>
+                            <asp:Image ID="ImageUser" runat="server" />
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="Profile.aspx">Profile</a>
+                          <a class="dropdown-item" href="#">Settings</a>
+                        </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-globe" aria-hidden="true">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="#">English</a>
+                          <a class="dropdown-item" href="#">Turkish</a>
+                        </div>
+                        </li>
+                        <li>
+                            <asp:Button ID="ButtonAsk" runat="server" class="btn btn-danger" Text="Add Question" />
+                        </li>
+                    </ul>
+                  </div>
+                </nav>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </header>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

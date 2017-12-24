@@ -1,0 +1,10 @@
+﻿@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700&subset=latin,latin-ext);
+body {
+    background-color:aliceblue;
+}
+
+header {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
+
