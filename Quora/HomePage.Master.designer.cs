@@ -85,13 +85,40 @@ namespace Quora {
         protected global::System.Web.UI.WebControls.BulletedList BulletedList;
         
         /// <summary>
-        /// ButtonAsk control.
+        /// LabelNameLast control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAsk;
+        protected global::System.Web.UI.WebControls.Label LabelNameLast;
+        
+        /// <summary>
+        /// TextBoxQuestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxQuestion;
+        
+        /// <summary>
+        /// DropDownListTopics control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListTopics;
+        
+        /// <summary>
+        /// ButtonAddQuestion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonAddQuestion;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

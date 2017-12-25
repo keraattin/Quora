@@ -16,7 +16,7 @@ namespace Quora
             DbConnection.ConnectDb();
 
             SqlCommand sc = new SqlCommand();
-            sc.CommandText = "Select Name from Users Where UserId = @UserId";
+            sc.CommandText = "Select Name,LastName from Users Where UserId = @UserId";
             sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
             sc.Connection = DbConnection.connection;
 
@@ -24,6 +24,7 @@ namespace Quora
             if(dr.Read())
             {
                 LabelName.Text = dr[0].ToString();
+                LabelNameLast.Text = dr[0].ToString() + " " + dr[1].ToString();
                 ImageUser.ImageUrl = "images/avatar_empty.png";
             }
 
@@ -49,6 +50,23 @@ namespace Quora
             DbConnection.DisconnectDb();
         }
 
+        private void getTopics()
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Select Topic from Topic";
+            sc.Connection = DbConnection.connection;
+
+            SqlDataReader dr = sc.ExecuteReader();
+            while (dr.Read())
+            {
+                DropDownListTopics.Items.Add(dr[0].ToString());
+            }
+
+            DbConnection.DisconnectDb();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserId"] == null)
@@ -59,6 +77,7 @@ namespace Quora
             {
                 GetUserName(); //Giriş yapan kişinin adını yukarıda yaz.
                 getLanguage(); //Giriş yapan kişinin bildiği diller.
+                getTopics();
             }
         }
 
@@ -71,6 +90,11 @@ namespace Quora
         protected void BulletedList_Click(object sender, BulletedListEventArgs e)
         {
             Response.Redirect("Index.aspx");
+        }
+
+        protected void ButtonAddQuestion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

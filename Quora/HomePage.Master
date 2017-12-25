@@ -44,7 +44,6 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <asp:Label ID="LabelName" runat="server" Text=""></asp:Label>
                             <asp:Image ID="ImageUser" runat="server" Height="20" Width="20" ImageAlign="AbsMiddle" />
-                            <!--<img src="images/avatar_empty.png" style="width:20px; height:20px;"/>-->
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="Profile.aspx">Profile</a>
@@ -61,11 +60,41 @@
                         </div>
                         </li>
                         <li>
-                            <asp:Button ID="ButtonAsk" runat="server" class="btn btn-danger" Text="Add Question" />
+                            <button type="button" class="btn btn-danger" id="myBtn">Add Question</button>
                         </li>
                     </ul>
                   </div>
                 </nav>
+                <div id="Modal"> <!--Modal Add Question-->
+                  <!-- Modal -->
+                  <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog">
+    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body" style="padding:40px;">
+                            <a href="Profile.aspx"><asp:Label ID="LabelNameLast" runat="server" Text=""></asp:Label></a><br />
+                            <br /><asp:TextBox ID="TextBoxQuestion" runat="server" class="form-control" placeholder="Your Question"></asp:TextBox><br />
+                            <asp:DropDownList ID="DropDownListTopics" runat="server"></asp:DropDownList>
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="ButtonAddQuestion" runat="server" Text="Add Question" type="submit" class="btn btn-primary btn-default pull-left" data-dismiss="modal" OnClick="ButtonAddQuestion_Click" />
+                        </div>
+                      </div>
+      
+                    </div>
+                  </div> 
+                <script>
+                $(document).ready(function(){
+                    $("#myBtn").click(function(){
+                        $("#myModal").modal();
+                    });
+                });
+                </script>
+                   </div><!--Modal Add Question son-->
                 </ContentTemplate>
             </asp:UpdatePanel>
         </header>
