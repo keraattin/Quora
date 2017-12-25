@@ -1,0 +1,8 @@
+Create procedure SoruyaKonuEkle(@QuestionId INT,@TopicId INT)
+As
+Begin
+	Insert into QuestionHasTopic
+	Values (@QuestionId,@TopicId)
+End
+
+Exec SoruyaKonuEkle '1000003' , '200016'

@@ -1,0 +1,8 @@
+Create procedure SoruyaCevapEkle(@QuestionId INT,@AnswerId INT)
+As
+Begin
+	Insert into QuestionHasAnswer
+	Values (@QuestionId,@AnswerId)
+End
+
+Exec SoruyaCevapEkle '1000003' , '2000003'

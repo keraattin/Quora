@@ -1,0 +1,8 @@
+Create procedure CevabaKisiEkle(@AnswerId INT, @QuestionId INT, @UserId INT)
+As
+Begin
+	Insert into UserAnswer
+	Values (@AnswerId,@QuestionId,@UserId,(Select Getdate()))
+End
+
+Exec CevabaKisiEkle '2000003','1000003','112'

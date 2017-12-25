@@ -22,20 +22,12 @@
                         <h5 class="panel-title"><b>Credential And Highlights</b><hr /></h5>
                       </div>
                       <div class="panel-body">
-                          <ul>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                          </ul>
+                          <asp:BulletedList ID="BulletedListLocation" runat="server">
+                          </asp:BulletedList> 
+                          <asp:BulletedList ID="BulletedListSchool" runat="server">
+                          </asp:BulletedList>
+                          <asp:BulletedList ID="BulletedListWork" runat="server">
+                          </asp:BulletedList>
                       </div>
                     </div>
               </div><!--Col-md-3 sonu -->
@@ -95,20 +87,8 @@
                         <h5 class="panel-title"><b>Knows About</b><hr /></h5>
                       </div>
                       <div class="panel-body">
-                          <ul>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                              <li>
-                                  <a href=""></a>
-                              </li>
-                          </ul>
+                          <asp:BulletedList ID="BulletedListKnowsAbout" runat="server">
+                          </asp:BulletedList>
                       </div>
                     </div>
             </div>

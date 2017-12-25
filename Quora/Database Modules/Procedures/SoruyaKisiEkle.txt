@@ -1,0 +1,8 @@
+Create procedure SoruyaKisiEkle(@QuestionId INT,@UserId INT)
+As
+Begin
+	Insert into UserAskQuestion
+	Values (@QuestionId,@UserId,(Select Getdate()))
+End
+
+Exec SoruyaKisiEkle '1000003' , '102'

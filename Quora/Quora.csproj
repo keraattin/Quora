@@ -65,6 +65,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database Modules\Procedures\CevabaKisiEkle.txt" />
+    <Content Include="Database Modules\Procedures\SoruyaCevapEkle.txt" />
+    <Content Include="Database Modules\Procedures\SoruyaKisiEkle.txt" />
+    <Content Include="Database Modules\Procedures\SoruyaKonuEkle.txt" />
     <Content Include="images\avatar_empty.png" />
     <Content Include="IndexStyle.css" />
     <Content Include="packages.config" />
@@ -171,6 +175,7 @@
       <DependentUpon>WebUserControlLogin.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

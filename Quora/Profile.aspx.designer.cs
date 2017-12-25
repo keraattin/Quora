@@ -58,6 +58,33 @@ namespace Quora {
         protected global::System.Web.UI.WebControls.Label LabelButtonFollowers;
         
         /// <summary>
+        /// BulletedListLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList BulletedListLocation;
+        
+        /// <summary>
+        /// BulletedListSchool control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList BulletedListSchool;
+        
+        /// <summary>
+        /// BulletedListWork control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList BulletedListWork;
+        
+        /// <summary>
         /// LabelAnswers control.
         /// </summary>
         /// <remarks>
@@ -101,5 +128,14 @@ namespace Quora {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelTopics;
+        
+        /// <summary>
+        /// BulletedListKnowsAbout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList BulletedListKnowsAbout;
     }
 }
