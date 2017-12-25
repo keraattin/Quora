@@ -40,5 +40,11 @@ namespace Quora
                 GetUserName(); //Giriş yapan kişinin adını yukarıda yaz.
             }
         }
+
+        protected void ButtonLogout_Click(object sender, EventArgs e)
+        {
+            Session.RemoveAll();                  //Bütün sessionları sil
+            Response.Redirect("Login.aspx");      //Giriş sayfasına dön
+        }
     }
 }

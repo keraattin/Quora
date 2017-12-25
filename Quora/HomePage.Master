@@ -21,14 +21,14 @@
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="padding-left:20%;">
+                    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light" style="text-align:center; align-items:center; padding-left:25%; ">
                         <a class="navbar-brand" href="Index.aspx" style="color:darkred; font-style:oblique; font-size:28px;">Quora</a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
                   <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                       <li class="nav-item active">
+                      <li class="nav-item active">
                         <a class="nav-link" href="Index.aspx">Home<span class="glyphicon glyphicon-list-alt"></span></a>
                       </li>
                        <li>
@@ -48,6 +48,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="Profile.aspx">Profile</a>
                           <a class="dropdown-item" href="#">Settings</a>
+                          <asp:Button ID="ButtonLogout" runat="server" class="dropdown-item" Text="Logout" OnClick="ButtonLogout_Click" />
                         </div>
                         </li>
                         <li class="nav-item dropdown">

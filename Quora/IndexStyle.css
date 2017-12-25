@@ -1,0 +1,20 @@
+﻿.panel-body {
+    text-align: left;
+    float:left;
+}
+
+.panel-body ul {
+    list-style-type: disc;
+}
+
+.panel-body ul li a{
+    color: #8a8a8a;
+}
+
+.panel-body ul li a:visited {
+    color: #8a8a8a;
+}
+
+.baslik{
+    padding:20px;
+}
