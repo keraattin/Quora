@@ -30,6 +30,25 @@ namespace Quora
             DbConnection.DisconnectDb();
         }
 
+        private void getLanguage()
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Select Language From UserLanguage Where UserId = @UserId";
+            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            sc.Connection = DbConnection.connection;
+
+            SqlDataReader dr = sc.ExecuteReader();
+            while (dr.Read())
+            {
+                BulletedList.Items.Add(dr[0].ToString()); //dr[0] = UserLanguage    
+            }
+            dr.Close();
+
+            DbConnection.DisconnectDb();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UserId"] == null)
@@ -39,6 +58,7 @@ namespace Quora
             else
             {
                 GetUserName(); //Giriş yapan kişinin adını yukarıda yaz.
+                getLanguage(); //Giriş yapan kişinin bildiği diller.
             }
         }
 
@@ -46,6 +66,11 @@ namespace Quora
         {
             Session.RemoveAll();                  //Bütün sessionları sil
             Response.Redirect("Login.aspx");      //Giriş sayfasına dön
+        }
+
+        protected void BulletedList_Click(object sender, BulletedListEventArgs e)
+        {
+            Response.Redirect("Index.aspx");
         }
     }
 }

@@ -56,9 +56,8 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="glyphicon glyphicon-globe" aria-hidden="true">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <a class="dropdown-item" href="#">English</a>
-                          <a class="dropdown-item" href="#">Turkish</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                            <asp:BulletedList ID="BulletedList" runat="server" BulletStyle="CustomImage" DisplayMode="LinkButton" OnClick="BulletedList_Click"></asp:BulletedList>
                         </div>
                         </li>
                         <li>

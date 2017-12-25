@@ -76,6 +76,15 @@ namespace Quora {
         protected global::System.Web.UI.WebControls.Button ButtonLogout;
         
         /// <summary>
+        /// BulletedList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList BulletedList;
+        
+        /// <summary>
         /// ButtonAsk control.
         /// </summary>
         /// <remarks>
