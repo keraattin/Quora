@@ -8,7 +8,7 @@
             <div class="col-md-3">
                     <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h5 class="panel-title"><b>Feeds</b></h5>
+                        <h5 class="panel-title"><b>Feeds</b><hr /></h5>
                       </div>
                       <div class="panel-body">
                           <ul>

@@ -24,6 +24,7 @@ namespace Quora
             if(dr.Read())
             {
                 LabelName.Text = dr[0].ToString();
+                ImageUser.ImageUrl = "images/avatar_empty.png";
             }
 
             DbConnection.DisconnectDb();

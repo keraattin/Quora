@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\avatar_empty.png" />
     <Content Include="IndexStyle.css" />
     <Content Include="packages.config" />
     <Content Include="css\bootstrap-grid.css.map" />
@@ -118,6 +119,7 @@
     <Content Include="Login.aspx" />
     <Content Include="LoginStyle.css" />
     <Content Include="Profile.aspx" />
+    <Content Include="ProfileStyle.css" />
     <Content Include="Test.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebUserControlLogin.ascx" />

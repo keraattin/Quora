@@ -43,7 +43,8 @@
                       <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <asp:Label ID="LabelName" runat="server" Text=""></asp:Label>
-                            <asp:Image ID="ImageUser" runat="server" />
+                            <asp:Image ID="ImageUser" runat="server" Height="20" Width="20" ImageAlign="AbsMiddle" />
+                            <!--<img src="images/avatar_empty.png" style="width:20px; height:20px;"/>-->
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="Profile.aspx">Profile</a>
