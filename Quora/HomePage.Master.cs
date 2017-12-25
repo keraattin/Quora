@@ -92,9 +92,44 @@ namespace Quora
             Response.Redirect("Index.aspx");
         }
 
+        private void askQuestion()
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Insert into Question Values (@Question)";
+            sc.Parameters.AddWithValue("@Question",TextBoxQuestion.Text);
+            sc.Connection = DbConnection.connection;
+            sc.ExecuteNonQuery();
+
+            SqlCommand hasTopic = new SqlCommand();
+            hasTopic.CommandText = "Insert into QuestionHasTopic " +
+            " Values ((Select TOP 1 QuestionId From Question Where Question=@Question ORDER BY QuestionId DESC),(Select TopicId From Topic Where Topic = @Topic))";
+            hasTopic.Parameters.AddWithValue("@Question",TextBoxQuestion.Text);
+            hasTopic.Parameters.AddWithValue("@Topic", DropDownListTopics.SelectedItem.Text);
+            hasTopic.Connection = DbConnection.connection;
+            hasTopic.ExecuteNonQuery();
+
+            SqlCommand userAsk = new SqlCommand();
+            userAsk.CommandText = "Insert into UserAskQuestion " +
+            " Values ((Select TOP 1 QuestionId From Question Where Question=@Question ORDER BY QuestionId DESC),@UserId,(Select getdate()))";
+            userAsk.Parameters.AddWithValue("@Question", TextBoxQuestion.Text);
+            userAsk.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            userAsk.Connection = DbConnection.connection;
+            userAsk.ExecuteNonQuery();
+
+            DbConnection.DisconnectDb();
+
+
+        }
+
         protected void ButtonAddQuestion_Click(object sender, EventArgs e)
         {
-
+            if(TextBoxQuestion.Text!=null)
+            {
+                askQuestion();
+                Response.Redirect(Request.RawUrl);
+            }
         }
     }
 }

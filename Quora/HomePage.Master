@@ -77,11 +77,11 @@
                         </div>
                         <div class="modal-body" style="padding:40px;">
                             <a href="Profile.aspx"><asp:Label ID="LabelNameLast" runat="server" Text=""></asp:Label></a><br />
-                            <br /><asp:TextBox ID="TextBoxQuestion" runat="server" class="form-control" placeholder="Your Question"></asp:TextBox><br />
+                            <br /><asp:TextBox ID="TextBoxQuestion" autofocus="" runat="server" class="form-control" placeholder="Your Question" required="" ></asp:TextBox><br />
                             <asp:DropDownList ID="DropDownListTopics" runat="server"></asp:DropDownList>
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="ButtonAddQuestion" runat="server" Text="Add Question" type="submit" class="btn btn-primary btn-default pull-left" data-dismiss="modal" OnClick="ButtonAddQuestion_Click" />
+                            <asp:Button ID="ButtonAddQuestion" runat="server" Text="Add Question" type="submit" class="btn btn-primary btn-default pull-left" OnClick="ButtonAddQuestion_Click" />
                         </div>
                       </div>
       
