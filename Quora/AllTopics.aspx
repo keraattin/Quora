@@ -9,7 +9,7 @@
                         <div class="col-md-4"></div>
                             <div class="col-md-4">
                                     <div class="card" style="margin-left:38%; width:600px; margin-top:2%;">
-                                      <h5 class="card-header"><a href="AllTopics/<%# Eval("TopicId") %>"> <%# Eval("Topic") %> </a></h5>
+                                      <h5 class="card-header"><a href="Topic.aspx?TopicId=<%# Eval("TopicId") %>"> <%# Eval("Topic") %> </a></h5>
                                       <div class="card-block" style="padding:8px;">
                                         <p><%# Eval("Description") %></p>
                                       </div>
