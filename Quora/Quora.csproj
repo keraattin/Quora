@@ -65,6 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AllTopics.aspx" />
     <Content Include="Database Modules\Procedures\CevabaKisiEkle.txt" />
     <Content Include="Database Modules\Procedures\SoruyaCevapEkle.txt" />
     <Content Include="Database Modules\Procedures\SoruyaKisiEkle.txt" />
@@ -129,6 +130,13 @@
     <Content Include="WebUserControlLogin.ascx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllTopics.aspx.cs">
+      <DependentUpon>AllTopics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AllTopics.aspx.designer.cs">
+      <DependentUpon>AllTopics.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DbConnection.cs" />
     <Compile Include="Hashing.cs" />
     <Compile Include="HomePage.Master.cs">

@@ -119,8 +119,6 @@ namespace Quora
             userAsk.ExecuteNonQuery();
 
             DbConnection.DisconnectDb();
-
-
         }
 
         protected void ButtonAddQuestion_Click(object sender, EventArgs e)
