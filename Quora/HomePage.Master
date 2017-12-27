@@ -48,6 +48,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <a class="dropdown-item" href="Profile.aspx">Profile</a>
                           <a class="dropdown-item" href="#">Settings</a>
+                          <a class="dropdown-item" href="AllTopics.aspx">Topics</a>
                           <asp:Button ID="ButtonLogout" runat="server" class="dropdown-item" Text="Logout" OnClick="ButtonLogout_Click" />
                         </div>
                         </li>

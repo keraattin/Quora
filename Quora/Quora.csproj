@@ -125,6 +125,7 @@
     <Content Include="LoginStyle.css" />
     <Content Include="Profile.aspx" />
     <Content Include="ProfileStyle.css" />
+    <Content Include="Question.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="Topic.aspx" />
     <Content Include="Web.config" />
@@ -169,6 +170,13 @@
       <DependentUpon>Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Question.aspx.cs">
+      <DependentUpon>Question.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Question.aspx.designer.cs">
+      <DependentUpon>Question.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -38,11 +38,40 @@ namespace Quora
 
         }
 
+        private void getQuestions()
+        {
+            try
+            {
+                DbConnection.ConnectDb();
+
+                SqlCommand sc = new SqlCommand();
+                sc.CommandText = "Select Question.QuestionId, Question.Question, Users.Name, Users.LastName,  UserAskQuestion.Date " +
+                " From Question,QuestionHasTopic,Topic,UserAskQuestion,Users " +
+                " Where Topic.TopicId = @TopicId And Question.QuestionId = QuestionHasTopic.QuestionId " +
+                " AND Topic.TopicId = QuestionHasTopic.TopicId AND Question.QuestionId = UserAskQuestion.QuestionId AND Users.UserId = UserAskQuestion.UserId ";
+                sc.Parameters.AddWithValue("@TopicId", Convert.ToInt32(Request.QueryString["TopicId"]));
+                sc.Connection = DbConnection.connection;
+
+                SqlDataReader rd = sc.ExecuteReader();
+
+                RepeaterQuestions.DataSource = rd;
+                RepeaterQuestions.DataBind();
+
+                DbConnection.DisconnectDb();
+            }
+            catch (Exception)
+            {
+                DbConnection.DisconnectDb();
+                Response.Redirect("Index.aspx");
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Request.QueryString != null)
+            if(Request.QueryString["TopicId"] != null)
             {
                 getTopics();
+                getQuestions();
             }
             else
             {
