@@ -63,10 +63,10 @@
                             <a href="Profile.aspx?UserId=<%# Session["UserId"] %>"><asp:Label ID="LabelUserName" runat="server" Text=""></asp:Label></a>
                         </div>
                         <div class="card-block" style="margin-top:5px;">
-                            <asp:TextBox ID="TextBoxAnswer" runat="server" placeholder="Your answer"></asp:TextBox>
+                            <asp:TextBox ID="TextBoxAnswer" runat="server" class="form-control input-lg" required=""></asp:TextBox>
                         </div>
                         <div class="card-footer">
-                              
+                            <asp:Button ID="ButtonSubmit" runat="server" Text="Submit" class="btn btn-primary" OnClick="ButtonSubmit_Click"/>
                         </div>
                     </div>
                 </div>

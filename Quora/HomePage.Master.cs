@@ -123,9 +123,13 @@ namespace Quora
 
         protected void ButtonAddQuestion_Click(object sender, EventArgs e)
         {
-            if(TextBoxQuestion.Text!=null)
+            if(TextBoxQuestion.Text!="")
             {
                 askQuestion();
+                Response.Redirect(Request.RawUrl);
+            }
+            else
+            {
                 Response.Redirect(Request.RawUrl);
             }
         }

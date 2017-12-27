@@ -102,7 +102,7 @@ namespace Quora
                 sc.CommandText = "Select Users.Name, Users.LastName, Answer.Answer , UserAnswer.Date " +
                 " From Users, Answer, UserAnswer, Question " +
                 " Where Question.QuestionId = @QuestionId AND UserAnswer.QuestionId = Question.QuestionId " +
-                " AND UserAnswer.UserId = Users.UserId AND UserAnswer.AnswerId = Answer.AnswerId ";
+                " AND UserAnswer.UserId = Users.UserId AND UserAnswer.AnswerId = Answer.AnswerId ORDER BY UserAnswer.Date , Answer.AnswerId DESC";
                 sc.Parameters.AddWithValue("@QuestionId", Convert.ToInt32(Request.QueryString["QuestionId"]));
                 sc.Connection = DbConnection.connection;
 
@@ -160,6 +160,54 @@ namespace Quora
             {
                 Response.Redirect("Index.aspx");
             }
+        }
+
+        private void submitAnswer()
+        {
+            try
+            {
+                DbConnection.ConnectDb();
+
+                SqlCommand sc = new SqlCommand();
+                sc.CommandText = "Insert into Answer Values (@Answer)";
+                sc.Parameters.AddWithValue("@Answer", TextBoxAnswer.Text);
+                sc.Connection = DbConnection.connection;
+                sc.ExecuteNonQuery();
+
+                SqlCommand insertQuestionHasAnswer = new SqlCommand();
+                insertQuestionHasAnswer.CommandText = "Insert into QuestionHasAnswer" +
+                " Values (@QuestionId,(Select TOP 1 AnswerId From Answer Where Answer=@Answer ORDER BY AnswerId DESC))";
+                insertQuestionHasAnswer.Parameters.AddWithValue("@QuestionId", Convert.ToInt32(Request.QueryString["QuestionId"]));
+                insertQuestionHasAnswer.Parameters.AddWithValue("@Answer", TextBoxAnswer.Text);
+                insertQuestionHasAnswer.Connection = DbConnection.connection;
+                insertQuestionHasAnswer.ExecuteNonQuery();
+
+                SqlCommand insertUserAnswer = new SqlCommand();
+                insertUserAnswer.CommandText = "Insert into UserAnswer " +
+                " Values ((Select TOP 1 AnswerId From Answer Where Answer=@Answer ORDER BY AnswerId DESC),@QuestionId,@UserId,(Select getdate())) ";
+                insertUserAnswer.Parameters.AddWithValue("@Answer", TextBoxAnswer.Text);
+                insertUserAnswer.Parameters.AddWithValue("@QuestionId", Convert.ToInt32(Request.QueryString["QuestionId"]));
+                insertUserAnswer.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+                insertUserAnswer.Connection = DbConnection.connection;
+                insertUserAnswer.ExecuteNonQuery();
+
+                DbConnection.DisconnectDb();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        protected void ButtonSubmit_Click(object sender, EventArgs e)
+        {
+            if(TextBoxAnswer.Text!="")
+            {
+                submitAnswer();
+                Response.Redirect(Request.RawUrl);
+            }
+           
         }
     }
 }

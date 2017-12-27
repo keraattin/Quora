@@ -48,7 +48,7 @@ namespace Quora
                 sc.CommandText = "Select Question.QuestionId, Question.Question, Users.Name, Users.LastName,  UserAskQuestion.Date " +
                 " From Question,QuestionHasTopic,Topic,UserAskQuestion,Users " +
                 " Where Topic.TopicId = @TopicId And Question.QuestionId = QuestionHasTopic.QuestionId " +
-                " AND Topic.TopicId = QuestionHasTopic.TopicId AND Question.QuestionId = UserAskQuestion.QuestionId AND Users.UserId = UserAskQuestion.UserId ";
+                " AND Topic.TopicId = QuestionHasTopic.TopicId AND Question.QuestionId = UserAskQuestion.QuestionId AND Users.UserId = UserAskQuestion.UserId ORDER BY UserAskQuestion.Date DESC";
                 sc.Parameters.AddWithValue("@TopicId", Convert.ToInt32(Request.QueryString["TopicId"]));
                 sc.Connection = DbConnection.connection;
 
