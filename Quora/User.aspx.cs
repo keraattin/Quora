@@ -25,6 +25,7 @@ namespace Quora
             getLocations();
             getSchools();
             getWork();
+            getFollow();
 
             DbConnection.DisconnectDb();
         }
@@ -211,6 +212,37 @@ namespace Quora
             dr.Close();
         }
 
+        private void getFollow()
+        {
+            if(Convert.ToInt32(Request.QueryString["UserId"]) == Convert.ToInt32(Session["UserId"]))
+            {
+                Response.Redirect("Profile.aspx"); //Giriş yapan kendisiyse profil sayfasına dön.
+            }
+            //Giriş yapan kişinin takip edip etmediği kontrol ediliyor.
+            SqlCommand checkFollow = new SqlCommand();
+            checkFollow.CommandText = "Select UserId,FollowingUserId From UserFollow " +
+            " Where UserId = @UserId AND FollowingUserId = @FollowingUserId ";
+            checkFollow.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            checkFollow.Parameters.AddWithValue("@FollowingUserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            checkFollow.Connection = DbConnection.connection;
+
+            SqlDataReader rd = checkFollow.ExecuteReader();
+            if(rd.Read())
+            {
+                ButtonFollow.Enabled = false;
+                ButtonFollow.Visible = false;
+                ButtonUnFollow.Enabled = true;
+                ButtonUnFollow.Visible = true;
+            }
+            else
+            {
+                ButtonFollow.Enabled = true;
+                ButtonFollow.Visible = true;
+                ButtonUnFollow.Enabled = false;
+                ButtonUnFollow.Visible = false;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["UserId"] != null)
@@ -222,6 +254,38 @@ namespace Quora
             {
                 Response.Redirect("Index.aspx");
             }
+        }
+
+        protected void ButtonFollow_Click(object sender, EventArgs e)
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Insert into UserFollow Values (@UserId,@FollowingUserId)";
+            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            sc.Parameters.AddWithValue("@FollowingUserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Connection = DbConnection.connection;
+            sc.ExecuteNonQuery();
+
+            DbConnection.DisconnectDb();
+
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void ButtonUnFollow_Click(object sender, EventArgs e)
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Delete From UserFollow Where UserId = @UserId AND FollowingUserId = @FollowingUserId ";
+            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            sc.Parameters.AddWithValue("@FollowingUserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Connection = DbConnection.connection;
+            sc.ExecuteNonQuery();
+
+            DbConnection.DisconnectDb();
+
+            Response.Redirect(Request.RawUrl);
         }
     }
 }
