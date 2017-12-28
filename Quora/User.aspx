@@ -18,7 +18,7 @@
                  <br />
                      </ItemTemplate>
                      </asp:Repeater>
-                   <asp:button ID="ButtonFollow" runat="server" text="Follow" type="button" class="btn" OnClick="ButtonFollow_Click"/>
+                   <asp:button ID="ButtonFollow" runat="server" text="Follow" type="button" class="btn btn-primary" OnClick="ButtonFollow_Click"/>
                    <asp:button ID="ButtonUnFollow" runat="server" text="Unfollow" type="button" class="btn" OnClick="ButtonUnFollow_Click" /> <button type="button" class="btn">Followers <asp:Label ID="LabelButtonFollowers" runat="server" Text=""></asp:Label><%# Eval("Description") %></button>
               </div>
             <div class="col-md-3"><!--Credentials And Highlights-->

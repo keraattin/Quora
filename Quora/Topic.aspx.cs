@@ -66,17 +66,79 @@ namespace Quora
             }
         }
 
+        private void getFollows()
+        {
+            DbConnection.ConnectDb();
+
+            //Giriş yapan kişinin takip edip etmediği kontrol ediliyor.
+            SqlCommand checkFollow = new SqlCommand();
+            checkFollow.CommandText = "Select UserId,TopicId From UserFollowTopic " +
+            " Where UserId = @UserId AND TopicId = @TopicId ";
+            checkFollow.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            checkFollow.Parameters.AddWithValue("@TopicId", Convert.ToInt32(Request.QueryString["TopicId"]));
+            checkFollow.Connection = DbConnection.connection;
+
+            SqlDataReader rd = checkFollow.ExecuteReader();
+            if (rd.Read())
+            {
+                ButtonFollow.Enabled = false;
+                ButtonFollow.Visible = false;
+                ButtonUnFollow.Enabled = true;
+                ButtonUnFollow.Visible = true;
+            }
+            else
+            {
+                ButtonFollow.Enabled = true;
+                ButtonFollow.Visible = true;
+                ButtonUnFollow.Enabled = false;
+                ButtonUnFollow.Visible = false;
+            }
+
+            DbConnection.DisconnectDb();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if(Request.QueryString["TopicId"] != null)
             {
                 getTopics();
                 getQuestions();
+                getFollows();
             }
             else
             {
                 Response.Redirect("Index.aspx");
             }
+        }
+
+        protected void ButtonFollow_Click(object sender, EventArgs e)
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Insert into UserFollowTopic Values (@UserId,@TopicId)";
+            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            sc.Parameters.AddWithValue("@TopicId", Convert.ToInt32(Request.QueryString["TopicId"]));
+            sc.Connection = DbConnection.connection;
+            sc.ExecuteNonQuery();
+
+            DbConnection.DisconnectDb();
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void ButtonUnFollow_Click(object sender, EventArgs e)
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Delete from UserFollowTopic Where UserId = @UserId AND TopicId = @TopicId";
+            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            sc.Parameters.AddWithValue("@TopicId", Convert.ToInt32(Request.QueryString["TopicId"]));
+            sc.Connection = DbConnection.connection;
+            sc.ExecuteNonQuery();
+
+            DbConnection.DisconnectDb();
+            Response.Redirect(Request.RawUrl);
         }
     }
 }
