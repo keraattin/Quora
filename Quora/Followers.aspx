@@ -56,7 +56,7 @@
                                   <a href="">Answers <asp:Label ID="LabelAnswers" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
-                                  <a href="">Questions <asp:Label ID="LabelQuestions" runat="server" Text="0"></asp:Label></a>
+                                  <a href="UserQuestions.aspx?UserId=<% Response.Write(Request.QueryString["UserId"]); %>">Questions <asp:Label ID="LabelQuestions" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
                                   <a href="">Activity</a>
