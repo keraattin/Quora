@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HomePage.Master" AutoEventWireup="true" CodeBehind="Profile.aspx.cs" Inherits="Quora.Profile" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HomePage.Master" AutoEventWireup="true" CodeBehind="Following.aspx.cs" Inherits="Quora.Following" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -10,11 +10,16 @@
                     <asp:Image ID="ImageProfile" runat="server" Height="120px" Width="120px" ImageAlign="AbsMiddle" />
              </div>
              <div class="col-md-5"> <!--Name, Credential, Description, Followers -->
-                    <asp:Label ID="LabelNameSurname" runat="server" Font-Bold="True" Font-Size="Larger" ForeColor="Black"></asp:Label><br />
-                    <asp:Label ID="LabelCredential" runat="server" Text="" Font-Size="Large"></asp:Label><br />
-                    <asp:Label ID="LabelDescription" runat="server" Text="" Font-Size="Medium"></asp:Label><br />
+                 <asp:Repeater ID="RepeaterCredentials" runat="server">
+                     <ItemTemplate>
+                    <asp:Label ID="LabelNameSurname" runat="server" Font-Bold="True" Font-Size="Larger" ForeColor="Black" text=""><%# Eval("Name") %> <%# Eval("LastName") %></asp:Label><br />
+                    <asp:Label ID="LabelCredential" runat="server" Text="" Font-Size="Large"></asp:Label><%# Eval("ProfileCredential") %><br />
+                    <asp:Label ID="LabelDescription" runat="server" Text="" Font-Size="Medium"><%# Eval("Description") %></asp:Label><br />
                  <br />
-                    <button type="button" class="btn">Followers <asp:Label ID="LabelButtonFollowers" runat="server" Text="0"></asp:Label> </button>
+                     </ItemTemplate>
+                     </asp:Repeater>
+                   <asp:button ID="ButtonFollow" runat="server" text="Follow" type="button" class="btn btn-primary" OnClick="ButtonFollow_Click"/>
+                   <asp:button ID="ButtonUnFollow" runat="server" text="Unfollow" type="button" class="btn" OnClick="ButtonUnFollow_Click" /> <button type="button" class="btn">Followers <asp:Label ID="LabelButtonFollowers" runat="server" Text=""></asp:Label><%# Eval("Description") %></button>
               </div>
             <div class="col-md-3"><!--Credentials And Highlights-->
                 <div class="panel panel-default">
@@ -66,7 +71,7 @@
                                   <a href="">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
-                                  <a href="Following.aspx?UserId=<% Response.Write(Session["UserId"]); %>">Following <asp:Label ID="LabelFollowing" runat="server" Text="0"></asp:Label></a>
+                                  <a href="">Following <asp:Label ID="LabelFollowing" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
                                   <a href="">Topics <asp:Label ID="LabelTopics" runat="server" Text="0"></asp:Label></a>
@@ -79,7 +84,14 @@
                     </div>
             </div>
             <div class="col-md-5">
-                <h5>Answers<hr /></h5>
+                <h5>Following<hr /></h5>
+                <asp:Repeater ID="RepeaterFollowing" runat="server">
+                    <ItemTemplate>
+                        <div class="form-group">
+                        <b><a href="User.aspx?UserId=<%# Eval("UserId") %>"><%# Eval("Name") %> <%# Eval("LastName") %></a></b><hr />
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
             <div class="col-md-3"><!--Knows About-->
                 <div class="panel panel-default">

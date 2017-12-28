@@ -9,8 +9,10 @@ using System.Data.SqlClient;
 
 namespace Quora
 {
-    public partial class User : System.Web.UI.Page
+    public partial class Following : System.Web.UI.Page
     {
+        public int requestId;
+
         private void fillTheLabels()
         {
             DbConnection.ConnectDb();
@@ -26,7 +28,7 @@ namespace Quora
             getSchools();
             getWork();
             getFollow();
-
+            getFollowingList();
 
             DbConnection.DisconnectDb();
         }
@@ -34,8 +36,8 @@ namespace Quora
         private void getCredentials()
         {
             SqlCommand sc = new SqlCommand();
-            sc.CommandText = "Select Name,LastName,ProfileCredential,Description From Users Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.CommandText = "Select Name,LastName,ProfileCredential,Description From Users Where UserId = @UserID";
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader rd = sc.ExecuteReader();
@@ -51,7 +53,7 @@ namespace Quora
         {
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Count(UserId) From UserFollow Where FollowingUserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader rd = sc.ExecuteReader();
@@ -68,7 +70,7 @@ namespace Quora
         {
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Count(FollowingUserId) From UserFollow Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader rd = sc.ExecuteReader();
@@ -84,7 +86,7 @@ namespace Quora
         {
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Count(TopicId) From UserFollowTopic Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader dr = sc.ExecuteReader();
@@ -100,7 +102,7 @@ namespace Quora
         {
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Count(QuestionId) From UserAskquestion Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader dr = sc.ExecuteReader();
@@ -116,7 +118,7 @@ namespace Quora
         {
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Count(AnswerId) From UserAnswer Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader dr = sc.ExecuteReader();
@@ -132,7 +134,7 @@ namespace Quora
             int counter = 0;
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Language From UserLanguage Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader dr = sc.ExecuteReader();
@@ -150,7 +152,7 @@ namespace Quora
             int counter = 0;
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Location,StartYear,EndYear From UserLocation Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader dr = sc.ExecuteReader();
@@ -172,7 +174,7 @@ namespace Quora
             int counter = 0;
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Degree,SchoolName,Concentration,GraduationYear From UserStudy Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader dr = sc.ExecuteReader();
@@ -195,7 +197,7 @@ namespace Quora
             int counter = 0;
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Select Organization,Position,StartYear,EndYear From UserWork Where UserId = @UserId";
-            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@UserId", requestId);
             sc.Connection = DbConnection.connection;
 
             SqlDataReader dr = sc.ExecuteReader();
@@ -215,20 +217,24 @@ namespace Quora
 
         private void getFollow()
         {
-            if(Convert.ToInt32(Request.QueryString["UserId"]) == Convert.ToInt32(Session["UserId"]))
+            if (requestId == Convert.ToInt32(Session["UserId"]))
             {
-                Response.Redirect("Profile.aspx"); //Giriş yapan kendisiyse profil sayfasına dön.
+                ButtonFollow.Enabled = false;
+                ButtonFollow.Visible = false;
+                ButtonUnFollow.Enabled = false;
+                ButtonUnFollow.Visible = false;
+                return;
             }
             //Giriş yapan kişinin takip edip etmediği kontrol ediliyor.
             SqlCommand checkFollow = new SqlCommand();
             checkFollow.CommandText = "Select UserId,FollowingUserId From UserFollow " +
             " Where UserId = @UserId AND FollowingUserId = @FollowingUserId ";
             checkFollow.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
-            checkFollow.Parameters.AddWithValue("@FollowingUserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            checkFollow.Parameters.AddWithValue("@FollowingUserId", requestId);
             checkFollow.Connection = DbConnection.connection;
 
             SqlDataReader rd = checkFollow.ExecuteReader();
-            if(rd.Read())
+            if (rd.Read())
             {
                 ButtonFollow.Enabled = false;
                 ButtonFollow.Visible = false;
@@ -242,18 +248,37 @@ namespace Quora
                 ButtonUnFollow.Enabled = false;
                 ButtonUnFollow.Visible = false;
             }
+            rd.Close();
+        }
+
+        private void getFollowingList()
+        {
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Select Users.UserId,Users.Name,Users.LastName From Users,UserFollow " +
+            " Where Users.UserId = UserFollow.FollowingUserId AND UserFollow.UserId = @UserId ";
+            sc.Parameters.AddWithValue("@UserId", requestId);
+            sc.Connection = DbConnection.connection;
+
+            SqlDataReader followingReader = sc.ExecuteReader();
+
+            RepeaterFollowing.DataSource = followingReader;
+            RepeaterFollowing.DataBind();
+
+            followingReader.Close();
         }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["UserId"] != null)
             {
+                requestId = Convert.ToInt32(Request.QueryString["UserId"]);
                 ImageProfile.ImageUrl = "images/avatar_empty.png";
                 fillTheLabels();
             }
             else
             {
-                Response.Redirect("Index.aspx");
+                requestId = Convert.ToInt32(Session["UserId"]); 
+                fillTheLabels();
             }
         }
 
@@ -264,7 +289,7 @@ namespace Quora
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Insert into UserFollow Values (@UserId,@FollowingUserId)";
             sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
-            sc.Parameters.AddWithValue("@FollowingUserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@FollowingUserId", requestId);
             sc.Connection = DbConnection.connection;
             sc.ExecuteNonQuery();
 
@@ -280,7 +305,7 @@ namespace Quora
             SqlCommand sc = new SqlCommand();
             sc.CommandText = "Delete From UserFollow Where UserId = @UserId AND FollowingUserId = @FollowingUserId ";
             sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
-            sc.Parameters.AddWithValue("@FollowingUserId", Convert.ToInt32(Request.QueryString["UserId"]));
+            sc.Parameters.AddWithValue("@FollowingUserId", requestId);
             sc.Connection = DbConnection.connection;
             sc.ExecuteNonQuery();
 

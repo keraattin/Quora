@@ -68,10 +68,10 @@
                                   <a href="">Blogs</a>
                               </li>
                               <li>
-                                  <a href="">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
+                                  <a href="Following.aspx?UserId=<% Response.Write(Request.QueryString["UserId"]); %>">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
-                                  <a href="">Following <asp:Label ID="LabelFollowing" runat="server" Text="0"></asp:Label></a>
+                                  <a href="">Following<asp:Label ID="LabelFollowing" runat="server" Text="0" ></asp:Label></a> 
                               </li>
                               <li>
                                   <a href="">Topics <asp:Label ID="LabelTopics" runat="server" Text="0"></asp:Label></a>

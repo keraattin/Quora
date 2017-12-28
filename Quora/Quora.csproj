@@ -70,6 +70,7 @@
     <Content Include="Database Modules\Procedures\SoruyaCevapEkle.txt" />
     <Content Include="Database Modules\Procedures\SoruyaKisiEkle.txt" />
     <Content Include="Database Modules\Procedures\SoruyaKonuEkle.txt" />
+    <Content Include="Following.aspx" />
     <Content Include="images\avatar_empty.png" />
     <Content Include="IndexStyle.css" />
     <Content Include="packages.config" />
@@ -140,6 +141,13 @@
       <DependentUpon>AllTopics.aspx</DependentUpon>
     </Compile>
     <Compile Include="DbConnection.cs" />
+    <Compile Include="Following.aspx.cs">
+      <DependentUpon>Following.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Following.aspx.designer.cs">
+      <DependentUpon>Following.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Hashing.cs" />
     <Compile Include="HomePage.Master.cs">
       <DependentUpon>HomePage.Master</DependentUpon>
