@@ -99,7 +99,7 @@ namespace Quora
                 DbConnection.ConnectDb();
 
                 SqlCommand sc = new SqlCommand();
-                sc.CommandText = "Select Users.Name, Users.LastName, Answer.Answer , UserAnswer.Date " +
+                sc.CommandText = "Select Users.UserId, Users.Name, Users.LastName, Answer.Answer , UserAnswer.Date " +
                 " From Users, Answer, UserAnswer, Question " +
                 " Where Question.QuestionId = @QuestionId AND UserAnswer.QuestionId = Question.QuestionId " +
                 " AND UserAnswer.UserId = Users.UserId AND UserAnswer.AnswerId = Answer.AnswerId ORDER BY UserAnswer.Date , Answer.AnswerId DESC";

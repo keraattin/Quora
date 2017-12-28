@@ -24,7 +24,7 @@
                   <div class="panel-footer">
                       <asp:Repeater ID="RepeaterQuestionUser" runat="server">
                           <ItemTemplate>
-                            <a href=""><%# Eval("Name") %> <%# Eval ("LastName") %></a>
+                            <a href="User.aspx?UserId=<%# Eval("UserId") %>"><%# Eval("Name") %> <%# Eval ("LastName") %></a>
                           </ItemTemplate>
                       </asp:Repeater>
                    </div>
@@ -40,7 +40,7 @@
                             <div class="col-md-6">
                                     <div class="panel panel-default" style="margin-top:2%;">
                                        <div class="panel-heading">
-                                            <a href=""><%# Eval("Name") %> <%# Eval("LastName") %></a> 
+                                            <a href="User.aspx?UserId=<%# Eval("UserId") %>"><%# Eval("Name") %> <%# Eval("LastName") %></a> 
                                         </div>
                                       <div class="panel-body" style="padding:8px;">
                                         <p><%# Eval("Answer") %></p>
