@@ -62,5 +62,37 @@ This empowers people to learn from each other and to better understand the world
 **You may add Topics to Questions.**
 ![AddTopicToQuestion](/Images/AddTopicToQuestion.png)
 
-**After adding Topics**
+**After adding Topics to Question**
 ![AfterInsertTopicToQuestion](/Images/AfterInsertTopicToQuestion.png)
+
+## Answers
+### Answer Question
+**You may Answer Questions**
+![GiveAnswer](/Images/GiveAnswer.png)
+
+**After Answer the Question**
+![AfterAnswered](/Images/AfterAnswered.png)
+
+## Profile
+### Profile
+**You will see your information here**
+![Profile](/Images/Profile.png)
+
+### Followers
+**You will see your Followers here**
+![ProfileFollowers](/Images/ProfileFollowers.png)
+
+### Followings
+**You will see the people you Follow here**
+![ProfileFollowing](/Images/ProfileFollowing.png)
+
+### Questions
+**You will see the Questions you Asked here**
+![ProfileQuestions](/Images/ProfileQuestions.png)
+
+### Questions
+**You may follow to other People**
+![FollowAUser](/Images/FollowAUser.png)
+
+**After you Follow the Person**
+![AfterFollowedUser](/Images/AfterFollowedUser.png)
