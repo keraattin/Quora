@@ -68,10 +68,10 @@
                                   <a href="">Blogs</a>
                               </li>
                               <li>
-                                  <a href="">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
+                                  <a href="Followers.aspx?UserId=<% Response.Write(Request.QueryString["UserId"]); %>">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
-                                  <a href="">Following <asp:Label ID="LabelFollowing" runat="server" Text="0"></asp:Label></a>
+                                  <a href="Following.aspx?UserId=<% Response.Write(Request.QueryString["UserId"]); %>">Following <asp:Label ID="LabelFollowing" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
                                   <a href="">Topics <asp:Label ID="LabelTopics" runat="server" Text="0"></asp:Label></a>
@@ -84,7 +84,7 @@
                     </div>
             </div>
             <div class="col-md-5">
-                <h5>Following<hr /></h5>
+                <h5>Followers<hr /></h5>
                 <asp:Repeater ID="RepeaterFollowing" runat="server">
                     <ItemTemplate>
                         <div class="form-group">
