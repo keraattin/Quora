@@ -25,13 +25,34 @@ namespace Quora
             {
                 LabelNameSurname.Text = rd[0].ToString() + " " + rd[1].ToString();
             }
-
+            rd.Close();
             DbConnection.DisconnectDb();
         }
+
+        private void getTopics()
+        {
+            DbConnection.ConnectDb();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Select Topic.TopicId,Topic.Topic,Topic.Description From UserFollowTopic,Topic,Users " +
+            " Where Users.UserId = @UserId AND Users.UserId = UserFollowTopic.UserId AND Topic.TopicId = UserFollowTopic.TopicId";
+            sc.Parameters.AddWithValue("@UserId", Convert.ToInt32(Session["UserId"]));
+            sc.Connection = DbConnection.connection;
+
+            SqlDataReader readTopic = sc.ExecuteReader();
+
+            RepeaterTopic.DataSource = readTopic;
+            RepeaterTopic.DataBind();
+            readTopic.Close();
+            
+            DbConnection.DisconnectDb();
+        }
+
 
         protected void Page_Load(object sender, EventArgs e)
         {
             getNameSurname(); //Kulanıcının adı soyadı alınıyor.
+            getTopics();
         }
     }
 }

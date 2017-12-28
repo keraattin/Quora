@@ -13,6 +13,8 @@
                        <a href="Topic.aspx?TopicId=<%# Eval("TopicId") %>"><input type="button" class="btn btn-primary" value="<%# Eval("Topic") %>" style="padding:0px" /></a>
                        </ItemTemplate>
                   </asp:Repeater>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-sm" style="margin-right:0; padding:0;">Add Topic</button>
+
                           </div>
                 <asp:Repeater ID="RepeaterQuestion" runat="server">
                         <ItemTemplate>
@@ -63,7 +65,7 @@
                             <a href="Profile.aspx?UserId=<%# Session["UserId"] %>"><asp:Label ID="LabelUserName" runat="server" Text=""></asp:Label></a>
                         </div>
                         <div class="card-block" style="margin-top:5px;">
-                            <asp:TextBox ID="TextBoxAnswer" runat="server" class="form-control input-lg" required=""></asp:TextBox>
+                            <asp:TextBox ID="TextBoxAnswer" runat="server" class="form-control input-lg"></asp:TextBox>
                         </div>
                         <div class="card-footer">
                             <asp:Button ID="ButtonSubmit" runat="server" Text="Submit" class="btn btn-primary" OnClick="ButtonSubmit_Click"/>
@@ -72,5 +74,15 @@
                 </div>
                 <div class="col-md-4"></div>           
          </div>
+    </div>
+      <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+           <div class="modal-body">
+            <asp:DropDownList ID="DropDownListTopics" runat="server"></asp:DropDownList>
+            <asp:Button ID="ButtonAddTopic" runat="server" Text="Add" type="button" class="btn btn-primary" OnClick="ButtonAddTopic_Click"/>
+            </div>
+         </div>
+      </div>
     </div>
 </asp:Content>

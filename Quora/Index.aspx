@@ -32,9 +32,21 @@
                     <div class="card">
                       <div class="card-block baslik">
                         <a href="Profile.aspx"><asp:Label ID="LabelNameSurname" runat="server" Text=""></asp:Label></a><br />
-                        <a class="h5" href="">What is your question?</a>
+                        <a class="h5" href="#" onclick="$('#myModal').modal('show')">What is your question?</a>
                       </div>
                    </div>
+                     <asp:Repeater ID="RepeaterTopic" runat="server">
+                        <ItemTemplate>
+                        <div class="card" style="margin-top:5px;">
+                            <div class="card-header">
+                                <a href="Topic.aspx?TopicId=<%# Eval("TopicId") %>"><h5><%# Eval("Topic") %></h5></a>
+                             </div>
+                            <div class="card-block" style="padding:5px;">
+                                 <p><%# Eval("Description") %></p>
+                            </div>
+                        </div>
+                       </ItemTemplate>
+                    </asp:Repeater>
             </div>
             <div class="col-md-3">
                 <div class="card" style="width:180px;">

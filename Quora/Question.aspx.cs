@@ -146,6 +146,32 @@ namespace Quora
             }
         }
 
+        private void fillDropdown()
+        {
+            try
+            {
+                DbConnection.ConnectDb();
+
+                SqlCommand sc = new SqlCommand();
+                sc.CommandText = "Select Topic from Topic";
+                sc.Connection = DbConnection.connection;
+
+                SqlDataReader dr = sc.ExecuteReader();
+                while (dr.Read())
+                {
+                    DropDownListTopics.Items.Add(dr[0].ToString());
+                }
+                dr.Close();
+
+                DbConnection.DisconnectDb();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["QuestionId"] != null)
@@ -155,6 +181,7 @@ namespace Quora
                 getQuestionUser();
                 getAnswers();
                 getUserName();
+                fillDropdown();
             }
             else
             {
@@ -208,6 +235,40 @@ namespace Quora
                 Response.Redirect(Request.RawUrl);
             }
            
+        }
+
+        protected void ButtonAddTopic_Click(object sender, EventArgs e)
+        {
+            
+                DbConnection.ConnectDb();
+                /*Soru için girilen topic zaten var mı kontrol ediliyor.*/
+                SqlCommand check = new SqlCommand();
+                check.CommandText = "Select QuestionId,TopicId From QuestionHasTopic" +
+                " Where QuestionId = @QuestionId AND TopicId = (Select TopicId From Topic Where Topic = @Topic)";
+                check.Parameters.AddWithValue("@QuestionId", Convert.ToInt32(Request.QueryString["QuestionId"]));
+                check.Parameters.AddWithValue("@Topic", DropDownListTopics.SelectedItem.Text);
+                check.Connection = DbConnection.connection;
+
+                SqlDataReader readerCheck = check.ExecuteReader();
+                if(readerCheck.Read())
+                {
+                    DbConnection.DisconnectDb();
+                    return;
+                }
+                readerCheck.Close();
+
+                SqlCommand sc = new SqlCommand();
+                sc.CommandText = "Insert into QuestionHasTopic" +
+                " Values (@QuestionId,(Select TopicId From Topic Where Topic = @Topic))";
+                sc.Parameters.AddWithValue("@QuestionId", Convert.ToInt32(Request.QueryString["QuestionId"]));
+                sc.Parameters.AddWithValue("@Topic", DropDownListTopics.SelectedItem.Text);
+                sc.Connection = DbConnection.connection;
+                sc.ExecuteNonQuery();
+
+                DbConnection.DisconnectDb();
+                Response.Redirect(Request.RawUrl);
+            
+            
         }
     }
 }
