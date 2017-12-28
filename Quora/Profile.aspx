@@ -63,7 +63,7 @@
                                   <a href="">Blogs</a>
                               </li>
                               <li>
-                                  <a href="">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
+                                  <a href="Followers.aspx?UserId=<% Response.Write(Session["UserId"]); %>">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
                                   <a href="Following.aspx?UserId=<% Response.Write(Session["UserId"]); %>">Following <asp:Label ID="LabelFollowing" runat="server" Text="0"></asp:Label></a>

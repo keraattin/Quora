@@ -1,8 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HomePage.Master" AutoEventWireup="true" CodeBehind="User.aspx.cs" Inherits="Quora.User" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/HomePage.Master" AutoEventWireup="true" CodeBehind="Followers.aspx.cs" Inherits="Quora.Followers" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <link href="ProfileStyle.css" rel="stylesheet" media="screen" />
+        <link href="ProfileStyle.css" rel="stylesheet" media="screen" />
     <div class="container" style="margin-top:85px;">
         <div class="row ust">
             <div class="col-md-1"></div>
@@ -68,10 +68,10 @@
                                   <a href="">Blogs</a>
                               </li>
                               <li>
-                                  <a href="Followers.aspx?UserId=<% Response.Write(Request.QueryString["UserId"]); %>">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
+                                  <a href="">Followers <asp:Label ID="LabelFollowers" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
-                                  <a href="Following.aspx?UserId=<% Response.Write(Request.QueryString["UserId"]); %>">Following <asp:Label ID="LabelFollowing" runat="server" Text="0" ></asp:Label></a> 
+                                  <a href="">Following <asp:Label ID="LabelFollowing" runat="server" Text="0"></asp:Label></a>
                               </li>
                               <li>
                                   <a href="">Topics <asp:Label ID="LabelTopics" runat="server" Text="0"></asp:Label></a>
@@ -84,7 +84,14 @@
                     </div>
             </div>
             <div class="col-md-5">
-                <h5>Answers<hr /></h5>
+                <h5>Following<hr /></h5>
+                <asp:Repeater ID="RepeaterFollowing" runat="server">
+                    <ItemTemplate>
+                        <div class="form-group">
+                        <b><a href="User.aspx?UserId=<%# Eval("UserId") %>"><%# Eval("Name") %> <%# Eval("LastName") %></a></b><hr />
+                        </div>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
             <div class="col-md-3"><!--Knows About-->
                 <div class="panel panel-default">
