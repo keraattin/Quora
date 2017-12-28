@@ -30,7 +30,45 @@ namespace Quora
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            getTopics();
+            getTopics();      
+        }
+
+        private void addTopic()
+        {
+            DbConnection.ConnectDb();
+            /*Soru için girilen topic zaten var mı kontrol ediliyor.*/
+            SqlCommand check = new SqlCommand();
+            check.CommandText = "Select Topic From Topic" +
+            " Where Topic =  @Topic";
+            check.Parameters.AddWithValue("@Topic", TextBoxTopic.Text);
+            check.Connection = DbConnection.connection;
+
+            SqlDataReader readerCheck = check.ExecuteReader();
+            if (readerCheck.Read())
+            {
+                DbConnection.DisconnectDb();
+                return;
+            }
+            readerCheck.Close();
+
+            SqlCommand sc = new SqlCommand();
+            sc.CommandText = "Insert into Topic(Topic,Description)" +
+            " Values (@Topic,@Description)";
+            sc.Parameters.AddWithValue("@Topic", TextBoxTopic.Text);
+            sc.Parameters.AddWithValue("@Description", TextBoxDescription.Text);
+            sc.Connection = DbConnection.connection;
+            sc.ExecuteNonQuery();
+
+            DbConnection.DisconnectDb();
+            Response.Redirect(Request.RawUrl);
+        }
+
+        protected void ButtonAddTopic_Click(object sender, EventArgs e)
+        {
+            if(TextBoxTopic.Text != "" && TextBoxDescription.Text != "")
+            {
+                addTopic();
+            }
         }
     }
 }

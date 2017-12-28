@@ -4,6 +4,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container" style="margin-top:85px;>
   <div class="row">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Add Topic</button>
+                    
                  <asp:Repeater ID="RepeaterTopic" runat="server">
                         <ItemTemplate>
                         <div class="col-md-4"></div>
@@ -20,4 +22,18 @@
                     </asp:Repeater>
    </div><!--Row sonu-->
 </div>
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+           <div class="modal-body">
+               <asp:TextBox ID="TextBoxTopic" runat="server" class="form-control" placeholder="Topic" autofocus=""></asp:TextBox>
+               <hr />
+               <asp:TextBox ID="TextBoxDescription" runat="server" class="form-control" placeholder="Description" Height="200px"></asp:TextBox>
+            </div>
+            <div class="modal-footer">
+                <asp:Button ID="ButtonAddTopic" runat="server" Text="Add Topic" type="button" class="btn btn-primary" OnClick="ButtonAddTopic_Click"/>
+            </div>
+         </div>
+      </div>
+    </div>
 </asp:Content>
